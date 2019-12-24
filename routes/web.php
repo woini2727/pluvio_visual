@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/usuarios','UsuariosController@index');
+Route::get('/usuarios/{usuario}','UsuariosController@show');
+
 
 Route::get('/', function () {
     return view('welcome',[
