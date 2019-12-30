@@ -24,3 +24,5 @@ Route::get('/test',function(){
   return view('form');
 });
 Route::get('firebase','FirebaseController@index');
+
+Route::post('/usuarios.mensajes','UsuariosController@store');
