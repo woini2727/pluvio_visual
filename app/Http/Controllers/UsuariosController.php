@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use http\Env;
 use Illuminate\Http\Request;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
 use App\Usuario;
 
 class UsuariosController extends Controller
@@ -16,7 +18,7 @@ class UsuariosController extends Controller
       $usuario = Usuario::find($id);
       return view('/usuario',compact('usuario'));
     }
-    public function store(){
+    /*public function store(){
         Usuario::create([
           'mensaje'=>request('mensaje'),
           'token'=>request('token')
@@ -40,5 +42,28 @@ class UsuariosController extends Controller
         curl_close($ch);
 
         return redirect('/');
-    }
+    }*/
+    public function store(){
+        Usuario::create([
+          'mensaje'=>request('mensaje'),
+          'token'=>request('token')
+        ]);
+
+    $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/firebase.json');
+    $firebase = (new Factory)
+    ->withServiceAccount($serviceAccount)
+    ->withDatabaseUri('https://laravelfirebase-fbf85.firebaseio.com/')
+    ->create();
+
+    $database = $firebase->getDatabase();
+
+    $newPost = $database
+    ->getReference('blog/posts')
+    ->push([
+    'mensaje' => request('mensaje'),
+    'token' => request('token')
+    ]);
+    print_r($newPost->getvalue());
+    return redirect('/');
+}
 }
