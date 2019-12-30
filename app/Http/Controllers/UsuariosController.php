@@ -37,8 +37,8 @@ class UsuariosController extends Controller
         curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($fields));
 
         $result = curl_exec($ch);
-        curl_close();
+        curl_close($ch);
 
-        return redirect('/',compact(json_decode($result,true)));
+        return redirect('/');
     }
 }
