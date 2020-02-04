@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/usuarios','UsuariosController@index');
+/*Route::get('/usuarios','UsuariosController@index');
 Route::get('/usuarios/{usuario}','UsuariosController@show');
 
 
@@ -25,4 +25,8 @@ Route::get('/test',function(){
 });
 Route::get('firebase','FirebaseController@index');
 
-Route::post('/usuarios.mensajes','UsuariosController@store');
+Route::post('/usuarios.mensajes','UsuariosController@store');*/
+
+Route::get('/',function (){
+    return view('menu');
+});
