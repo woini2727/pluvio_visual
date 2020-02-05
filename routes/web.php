@@ -33,15 +33,21 @@ Route::get('/',function (){
 
 Route::get('/lujan/{id}',function (){
     $estacion = [
-        "nombre" =>"luján"
+        "nombre" =>"lujan",
+        "id"=>2,
+        "informes"=>["Anual","Mensual","Diario"]
     ];
     return view("informes/menu_informes",compact('estacion'));
 });
 
 Route::get('/san_andres/{id}',function (){
     $estacion = [
-        "nombre" =>"san andrés"
+        "nombre" =>"san andres",
+        "id" => 1,
+        "informes"=>["Anual","Mensual","Diario"]
     ];
     return view("informes/menu_informes",compact('estacion'));
 });
 
+Route::get('/lujan/{id}/{tipo_informe}','InformeController@show');
+Route::get('/san_andres/{id}/{tipo_informe}','InformeController@show');
