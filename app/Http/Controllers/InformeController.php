@@ -11,7 +11,7 @@ class InformeController extends Controller
         $informes_anuales = DB::table('reporte')
             ->where('id_estacion',"=",$estacion->id_estacion)
             ->where('tipo_reporte',"=", strtolower($tiporeporte))
-            ->where('anio',"=",19)
+            ->orderBy('id_esp')
             ->get();
 
         #print_r($informes_anuales);
@@ -29,9 +29,16 @@ class InformeController extends Controller
         }*/
 
         //return "informe {$tipoinforme}";
-        $hola = ["a"=>"Anual",
-                  "b" =>"lujan"];
-        return view("grids/grid",compact('informes_anuales'),compact('hola'));
+        #$hola="";
+        #return view("grids/grid",compact('informes_anuales'),compact('estacion','hola'));
+        return view("grids/grid",compact('informes_anuales'),compact('estacion','tiporeporte'));
         #return "";
+    }
+
+    public function promedio($tiporeporte,$id_reporte){
+
+        $promedio = DB::table('promedio')->where('id_reporte',"=",$id_reporte)->first();
+        $datos_reg = DB::table('datos_registrados')->where('id_reporte',"=",$id_reporte)->get();
+        return view("grids/grid_datos_informes",compact('promedio','tiporeporte'),compact('datos_reg'));
     }
 }

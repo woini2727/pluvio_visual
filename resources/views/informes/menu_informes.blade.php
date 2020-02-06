@@ -3,7 +3,8 @@
 @section('content')
 
 <div class="container">
-    <h1 class="text-center mt-3 display-4">Estación :</h1>
+    <h1 class="text-center mt-3 display-4">Estación {{$estacion["nombre"]}}:</h1>
+    <h1 class="text-left mt-3 display-5">Reportes:</h1>
 </div>
 <div class="container h4">
   <ul class="list-group h3">
