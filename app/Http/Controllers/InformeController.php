@@ -14,31 +14,24 @@ class InformeController extends Controller
             ->orderBy('id_esp')
             ->get();
 
-        #print_r($informes_anuales);
-       /* foreach ($informes_anuales as $informe){
-            #print_r($informe);
-            $id_reporte=$informe->id_reporte;
-            print($informe->id_reporte."\n" );
-            $promedio=DB::table('promedio')
-                ->where('id_reporte','=',$id_reporte)->get();
-            print_r($promedio);
-
-            $datos_reg=DB::table('datos_registrados')
-                ->where('id_reporte',"=",$id_reporte)->get();
-            print_r($datos_reg);
-        }*/
-
-        //return "informe {$tipoinforme}";
-        #$hola="";
-        #return view("grids/grid",compact('informes_anuales'),compact('estacion','hola'));
         return view("grids/grid",compact('informes_anuales'),compact('estacion','tiporeporte'));
         #return "";
     }
 
-    public function promedio($tiporeporte,$id_reporte){
-
+    public function alldata($tiporeporte,$id_reporte){
+        $reporte= DB::table('reporte')->where('id_reporte','=',$id_reporte)->first();
         $promedio = DB::table('promedio')->where('id_reporte',"=",$id_reporte)->first();
         $datos_reg = DB::table('datos_registrados')->where('id_reporte',"=",$id_reporte)->get();
-        return view("grids/grid_datos_informes",compact('promedio','tiporeporte'),compact('datos_reg'));
+        return view("grids/grid_datos_informes",compact('promedio','tiporeporte','reporte'),compact('datos_reg'));
+    }
+    public function promedio($tiporeporte,$id_reporte){
+        $reporte= DB::table('reporte')->where('id_reporte','=',$id_reporte)->first();
+        $promedio = DB::table('promedio')->where('id_reporte',"=",$id_reporte)->first();
+        return view("grids/grid_datos_promedio",compact('promedio','tiporeporte','reporte'));
+    }
+    public function datos_reg($tiporeporte,$id_reporte){
+        $reporte= DB::table('reporte')->where('id_reporte','=',$id_reporte)->first();
+        $datos_reg = DB::table('datos_registrados')->where('id_reporte',"=",$id_reporte)->get();
+        return view("grids/grid_datos_reg",compact('datos_reg','tiporeporte','reporte'));
     }
 }
