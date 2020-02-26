@@ -3,6 +3,7 @@
     <div class="container mb-3 bg-white">
         <h1 class="">Promedio del reporte {{$tiporeporte}} {{$reporte->fecha}}</h1>
     </div>
+    <a href="{{ route('customer.pdf') }}">Export PDF</a>
 
     <h4>Temperatura:</h4>
 

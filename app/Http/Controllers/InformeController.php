@@ -34,4 +34,16 @@ class InformeController extends Controller
         $datos_reg = DB::table('datos_registrados')->where('id_reporte',"=",$id_reporte)->get();
         return view("grids/grid_datos_reg",compact('datos_reg','tiporeporte','reporte'));
     }
+    public function export_pdf()
+    {
+        // Fetch all customers from database
+        $data = DB::table('estacion')->first();
+        #var_dump($data[0]);
+        // Send data to the view using loadView function of PDF facade
+        $pdf = \PDF::loadView('pdf.customers', compact('data'));
+        // If you want to store the generated pdf to the server then you can use the store function
+        $pdf->save(storage_path().'_filename.pdf');
+        // Finally, you can download the file using download function
+        return $pdf->download('customers.pdf');
+    }
 }

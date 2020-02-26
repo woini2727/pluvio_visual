@@ -54,3 +54,4 @@ Route::get('/san_andres/{id}/{tipo_informe}','InformeController@show');
 Route::get('/datos_informes/{tipo_informe}/{id_reporte}','InformeController@alldata');
 Route::get('/promedio/{tipo_informe}/{id_reporte}','InformeController@promedio');
 Route::get('/datos_registrados/{tipo_informe}/{id_reporte}','InformeController@datos_reg');
+Route::get('/customers/pdf','InformeController@export_pdf')->name('customer.pdf');
